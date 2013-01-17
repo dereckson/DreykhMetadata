@@ -40,7 +40,18 @@ class MediaWikiMedia extends Media {
      * @return string The description of the work.
      */
     static function ParseDescription ($text) {
-        return "Crassula arborescens, Botanic Garden, Munich, Germany";
+        $find = "description";
+        $pos = strpos($text,$find);
+        $endes = "{{en|1=";
+        if($pos){
+
+            $pos = strpos($text, $endes);
+        }
+        $str = substr($text, $pos+strlen($endes));
+        $pos1 = strpos($str, "}}");
+        $str = substr($str, 0, $pos1);
+        $str = str_replace("'", "", $str);
+        return $str;
     }
 
     /**
