@@ -17,7 +17,7 @@ require_once('../../DreykhMetadata/License.php');
 /**
  * Test cases for the class License
  */
-class LicenseTest extends PHPUnit_Framework_TestCase {
+class LicenseTest extends \PHPUnit_Framework_TestCase {
     /**
      * Tests the License::__toString method.
      */

@@ -12,12 +12,14 @@
 
 namespace DreykhMetadata;
 
+require_once('../../DreykhMetadata/Author.php');
+require_once('../../DreykhMetadata/License.php');
 require_once('../../DreykhMetadata/Media.php');
 
 /**
  * Test cases for the class License
  */
-class MediaTest extends PHPUnit_Framework_TestCase {
+class MediaTest extends \PHPUnit_Framework_TestCase {
     /**
      * Tests the Media::__toString method.
      */

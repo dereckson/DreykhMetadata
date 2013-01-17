@@ -12,12 +12,15 @@
 
 namespace DreykhMetadata;
 
+require_once('../../DreykhMetadata/Author.php');
+require_once('../../DreykhMetadata/License.php');
+require_once('../../DreykhMetadata/Media.php');
 require_once('../../DreykhMetadata/MediaWikiMedia.php');
 
 /**
  * Test cases for the class License
  */
-class MediaWikiMediaTest extends PHPUnit_Framework_TestCase {
+class MediaWikiMediaTest extends \PHPUnit_Framework_TestCase {
     /**
      * Tests the parser functions
      */

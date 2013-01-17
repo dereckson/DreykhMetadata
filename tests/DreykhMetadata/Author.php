@@ -17,14 +17,14 @@ require_once('../../DreykhMetadata/Author.php');
 /**
  * Test cases for the class Author
  */
-class AuthorTest extends PHPUnit_Framework_TestCase {
+class AuthorTest extends \PHPUnit_Framework_TestCase {
     /**
      * Tests the Author::__toString method.
      */
     public function testToString () {
         //Asserts an Author instance without an URL property is rendered as its name
         $author = new Author();
-        $author->name = "Quux"
+        $author->name = "Quux";
         $this->assertEquals($author, "Quux");
 
         //Asserts an Author instance with an URL property is rendered as an HTML link
