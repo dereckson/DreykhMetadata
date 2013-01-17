@@ -95,9 +95,9 @@ EOT;
 
         //Empty string
         $media = MediaWikiMedia::FromWikitext("");
-        $this->assertEquals($media->description, "");
-        $this->assertEquals(count($media->authors), 0);
-        $this->assertEquals(count($media->licenses), 0);
+        $this->assertEquals( "" , $media->description );
+        $this->assertEquals( 0, count($media->authors) );
+        $this->assertEquals( 0, count($media->licenses) );
 
         //{{Information}}
         $media = MediaWikiMedia::FromWikitext($textInformation);
@@ -105,20 +105,20 @@ EOT;
         $expectedLicense->name = "Creative Commons Attribution-ShareAlike 3.0 Unported";
         $expectedLicense->code = "CC BY-SA 3.0";
         $expectedLicense->URL = "http://creativecommons.org/licenses/by-sa/3.0/";
-        $this->assertEquals( "Crassula arborescens, Botanic Garden, Munich, Germany+", $media->description);
-        $this->assertEquals($media->authors, array('Poco a poco'));
-        $this->assertEquals($media->licenses, array($expectedLicense));
+        $this->assertEquals( "Crassula arborescens, Botanic Garden, Munich, Germany+", $media->description );
+        $this->assertEquals( array('Poco a poco'), $media->authors );
+        $this->assertEquals( array($expectedLicense), $media->licenses );
 
         //{{Artwork}}
         $media = MediaWikiMedia::FromWikitext($textArtwork);
         $expectedLicense = new License();
-        $this->assertEquals($media->description, "Portrait de Picasso");
-        $this->assertEquals($media->authors, array('Amedeo Modigliani'));
-        $this->assertEquals(count($media->licenses), 1);
+        $this->assertEquals( "Portrait de Picasso", $media->description) ;
+        $this->assertEquals( array('Amedeo Modigliani'), $media->authors );
+        $this->assertEquals( 1, count($media->licenses) );
         $licenseToTest = $media->licenses[0];
-        $this->assertEquals($licenseToTest->name, "Public domain");
-        $this->assertEquals($licenseToTest->code, "PD");
-        $this->assertEquals($licenseToTest->URL, "");
+        $this->assertEquals( "Public domain", $licenseToTest->name );
+        $this->assertEquals( "PD", $licenseToTest->code );
+        $this->assertEquals( "", $licenseToTest->URL );
     }
 
     /**

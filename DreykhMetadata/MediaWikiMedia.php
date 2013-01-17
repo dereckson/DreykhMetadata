@@ -40,8 +40,14 @@ class MediaWikiMedia extends Media {
      * @return string The description of the work.
      */
     static function ParseDescription ($text) {
+        $pos = strpos($text, "{{Information") || strpos($text, "{{information"); 
+        if ( $pos === false ) { 
+            $pos = strpos($text, "{{Artwork"); 
+        };
+        $str = substr($text, $pos);
         $find = "description";
         $pos = strpos($text,$find);
+        
         if ($pos) {//checking id description field is there or not
             $str = substr($text, $pos+strlen($find));
         }
