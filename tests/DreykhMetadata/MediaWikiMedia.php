@@ -20,6 +20,7 @@ require_once('../../DreykhMetadata/MediaWikiMedia.php');
 /**
  * Test cases for the class License
  */
+#{{en|''Crassula arborescens'', Botanic Garden, Munich, Germany}}
 class MediaWikiMediaTest extends \PHPUnit_Framework_TestCase {
     /**
      * Tests the parser functions
@@ -29,7 +30,6 @@ class MediaWikiMediaTest extends \PHPUnit_Framework_TestCase {
 =={{int:filedesc}}==
 {{Information
 |description=
-{{en|1=''Crassula arborescens'', Botanic Garden, Munich, Germany}}
 {{es|1=''Crassula arborescens'', Jardín Botánico, Múnich, Alemania}}
 {{fr|1=''Crassula arborescens'', Jardin botanique, Munich, Allemagne}}
 |date=2012-04-21
@@ -105,7 +105,7 @@ EOT;
         $expectedLicense->name = "Creative Commons Attribution-ShareAlike 3.0 Unported";
         $expectedLicense->code = "CC BY-SA 3.0";
         $expectedLicense->URL = "http://creativecommons.org/licenses/by-sa/3.0/";
-        $this->assertEquals( "Crassula arborescens, Botanic Garden, Munich, Germany", $media->description);
+        $this->assertEquals( "Crassula arborescens, Botanic Garden, Munich, Germany+", $media->description);
         $this->assertEquals($media->authors, array('Poco a poco'));
         $this->assertEquals($media->licenses, array($expectedLicense));
 
