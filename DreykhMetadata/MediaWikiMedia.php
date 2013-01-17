@@ -40,79 +40,32 @@ class MediaWikiMedia extends Media {
      * @return string The description of the work.
      */
     static function ParseDescription ($text) {
-        /*
         $find = "description";
         $pos = strpos($text,$find);
-        $endes = "{{en|1=";
-        if($pos){
-
-            $pos = strpos($text, $endes);
-        }
-        $str = substr($text, $pos+strlen($endes));
-        $pos1 = strpos($str, "}}");
-        $str = substr($str, 0, $pos1);
-        $str = str_replace("''", "", $str);
-
-        */
-
-        #testing which template
-        $find = "description";
-        if( strpos($text, "Information") ){
-            $pos = strpos($text,$find);
-            if ($pos) {//checking id description field is there or not
-                $str = substr($text, $pos+strlen($find));
-            }
-            else{
-                return "";
-            }
-            $pos = strpos($str, "{{");
-            $str = substr($str, $pos + strlen("{{"));
-            $pos1 = strpos($str, "}}");
-            $str = substr($str, 0, $pos1);
-
-            if( strpos($str, "=") ){
-                $pos = strpos($str, "=");
-                $str = substr($str, $pos + strlen("="));
-                $str = str_replace("''", "", $str);
-            }
-            elseif ( strpos($str, "|") ) {
-                $pos = strpos($str, "|");
-                $str = substr($str, $pos + strlen("|"));
-                $str = str_replace("''", "", $str);
-            }
-            else{
-                $str = $str ;
-            }
-        }
-        elseif (strpos($text, "Artwork")) {
-            $pos = strpos($text,$find);
-            if ($pos) {//checking id description field is there or not
-                $str = substr($text, $pos+strlen($find));
-            }
-            else{
-                return "";
-            }
-            $pos = strpos($str, "{{");
-            $str = substr($str, $pos + strlen("{{"));
-            $pos1 = strpos($str, "}}");
-            $str = substr($str, 0, $pos1);
-
-            if( strpos($str, "=") ){
-                $pos = strpos($str, "=");
-                $str = substr($str, $pos + strlen("="));
-                $str = str_replace("''", "", $str);
-            }
-            elseif ( strpos($str, "|") ) {
-                $pos = strpos($str, "|");
-                $str = substr($str, $pos + strlen("|"));
-                $str = str_replace("''", "", $str);
-            }
-            else{
-                $str = $str ;
-            }
+        if ($pos) {//checking id description field is there or not
+            $str = substr($text, $pos+strlen($find));
         }
         else{
-            $str = "";
+            return "";
+        }
+        #Extracting Info from Description
+        $pos = strpos($str, "{{");
+        $str = substr($str, $pos + strlen("{{"));
+        $pos1 = strpos($str, "}}");
+        $str = substr($str, 0, $pos1);
+
+        if( strpos($str, "=") ){
+            $pos = strpos($str, "=");
+            $str = substr($str, $pos + strlen("="));
+            $str = str_replace("''", "", $str);
+        }
+        elseif ( strpos($str, "|") ) {
+            $pos = strpos($str, "|");
+            $str = substr($str, $pos + strlen("|"));
+            $str = str_replace("''", "", $str);
+        }
+        else{
+            $str = $str ;
         }
 
         return $str;

@@ -62,12 +62,12 @@ class MediaWikiMediaTest extends \PHPUnit_Framework_TestCase {
 [[Category:2012 in Munich]]
 [[Category:April 2012 in Germany]]
 EOT;
-        $textQuux = <<<EOT
+        $textArtwork = <<<EOT
 == {{int:filedesc}} ==
 {{Artwork
  |artist           = {{creator:Amedeo Modigliani}}
  |title            = {{fr|''Portrait de Picasso }}
- |description      = 
+ |description      = {{es|1=''Crassula arborescens'', Jardín Botánico, Múnich, Alemania}}
  |date             = 1915
  |medium           = {{Technique|oil|canvas}}
  |dimensions       = 
