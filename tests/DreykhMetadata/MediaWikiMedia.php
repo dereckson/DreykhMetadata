@@ -106,14 +106,14 @@ EOT;
         $expectedLicense->code = "CC BY-SA 3.0";
         $expectedLicense->URL = "http://creativecommons.org/licenses/by-sa/3.0/";
         $this->assertEquals($media->description, "Crassula arborescens, Botanic Garden, Munich, Germany");
-        $this->assertEquals($media->authors, [ 'Poco a poco' ]);
-        $this->assertEquals($media->licenses, [ $expectedLicense ]);
+        $this->assertEquals($media->authors, array('Poco a poco'));
+        $this->assertEquals($media->licenses, array($expectedLicense));
 
         //{{Artwork}}
         $media = MediaWikiMedia::FromWikitext($textArtwork);
         $expectedLicense = new License();
         $this->assertEquals($media->description, "Portrait de Picasso");
-        $this->assertEquals($media->authors, [ 'Amedeo Modigliani' ]);
+        $this->assertEquals($media->authors, array('Amedeo Modigliani'));
         $this->assertEquals(count($media->licenses), 1);
         $licenseToTest = $media->licenses[0];
         $this->assertEquals($licenseToTest->name, "Public domain");
