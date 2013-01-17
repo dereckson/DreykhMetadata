@@ -1,0 +1,23 @@
+                ___                _    _
+               /   \_ __ ___ _   _| | _| |__
+              / /\ / '__/ _ \ | | | |/ / '_ \
+             / /_//| | |  __/ |_| |   <| | | |
+            /___,' |_|  \___|\__, |_|\_\_| |_|
+             _            _ |___/ _
+  /\/\   ___| |_ __ _  __| | __ _| |_ __ _ 0.1.0
+ /    \ / _ \ __/ _` |/ _` |/ _` | __/ _` |
+/ /\/\ \  __/ || (_| | (_| | (_| | || (_| |
+\/    \/\___|\__\__,_|\__,_|\__,_|\__\__,_|
+
+
+DreykhMetadata is a library to describe a content metadata.
+
+This is mainly intended to provider helper methods to tools
+interacting with MediaWiki content, or to MediaWiki extensions.
+
+Architecture:   Sébastien Santoro aka Dereckson
+Development:    Harsh Kothari
+
+Requirements
+------------
+    PHP 5.3+
