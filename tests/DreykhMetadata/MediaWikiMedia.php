@@ -105,7 +105,7 @@ EOT;
         $expectedLicense->name = "Creative Commons Attribution-ShareAlike 3.0 Unported";
         $expectedLicense->code = "CC BY-SA 3.0";
         $expectedLicense->URL = "http://creativecommons.org/licenses/by-sa/3.0/";
-        $this->assertEquals($media->description, "Crassula arborescens, Botanic Garden, Munich, Germany");
+        $this->assertEquals( "Crassula arborescens, Botanic Garden, Munich, Germany", $media->description);
         $this->assertEquals($media->authors, array('Poco a poco'));
         $this->assertEquals($media->licenses, array($expectedLicense));
 
