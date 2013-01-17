@@ -4,7 +4,7 @@
  *
  * @package     DreykhMetadata
  * @author      Harsh Kothari (http://mediawiki.org/wiki/User:Harsh4101991) <harshkothari410@gmail.com>
- * @author      Sébastien Santoro aka Dereckson <dereckson@espace-win.org>
+ * @author      SÃ©bastien Santoro aka Dereckson <dereckson@espace-win.org>
  * @license     http://www.opensource.org/licenses/bsd-license.php BSD
  * @version     0.1
  */
@@ -17,6 +17,8 @@ namespace DreykhMetadata;
 class MediaWikiMedia extends Media {
     /**
      * Constructs a MediaWikiMedia objet from the wiki text of a media page.
+     *
+     * @param string $text The wiki text
      */
     static function FromWikitext ($text) {
         $media = new Media();
@@ -24,11 +26,13 @@ class MediaWikiMedia extends Media {
         $media->description = self::ParseDescription($text);
         $media->authors = self::ParseAuthors($text);
         $media->title = self::ParseTitle($text);
-        
+
         // Parses licenses template / categories
         $media->licenses = self::ParseLicenses($text);
+
+        return $media;
     }
-    
+
     /**
      * Parses a MediaWiki page to get the description.
      *
@@ -38,7 +42,7 @@ class MediaWikiMedia extends Media {
     static function ParseDescription ($text) {
         return "";
     }
-        
+
     /**
      * Parses a MediaWiki page to get the authors.
      *
@@ -49,7 +53,7 @@ class MediaWikiMedia extends Media {
         $authors = array();
         return $authors;
     }
-    
+
     /**
      * Parses a MediaWiki page to get the title.
      *
@@ -61,7 +65,7 @@ class MediaWikiMedia extends Media {
     static function ParseTitle ($text) {
         return "";
     }
-        
+
     /**
      * Parses a MediaWiki page to get the licenses.
      *
