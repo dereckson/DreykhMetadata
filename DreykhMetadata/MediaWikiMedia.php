@@ -40,7 +40,56 @@ class MediaWikiMedia extends Media {
      * @return string The description of the work.
      */
     static function ParseDescription ($text) {
-        return "";
+
+        $text = preg_replace( '/^.*([Ii]nformation|[Aa]rtwork)/', '', $text );
+       /* $pos = strpos($text, "{{Information"); 
+        if ( $pos === false ) { 
+            $pos = strpos($text, "{{information"); 
+        }
+
+        if ( $pos === false ) {
+            $pos = strpos($text, "{{Artwork");
+        }
+
+        if ( $pos === false ) {
+            $pos = strpos($text, "{{artwork");
+        }
+*/
+        #$str = substr($text, $pos);
+        $find = "description";
+        $pos = strpos($text,$find);
+        
+        if ($pos) {//checking id description field is there or not
+            $str = substr($text, $pos+strlen($find));
+        }
+        else{
+            return "";
+        }
+        #Extracting Info from Description
+        $pos = strpos($str, "{{");
+        $str = substr($str, $pos + strlen("{{"));
+        $pos1 = strpos($str, "}}");
+        $str = substr($str, 0, $pos1);
+
+        if( strpos($str, "=") ){
+            $pos = strpos($str, "=");
+            $str = substr($str, $pos + strlen("="));
+            $str = str_replace("''", "", $str);
+            $str = preg_replace( '/\[\[([^\]\|]+\|)?([^\]\|]+)\]\]/', "$2", $str );
+        }
+        elseif ( strpos($str, "|") ) {
+            $pos = strpos($str, "|");
+            $str = substr($str, $pos + strlen("|"));
+            $str = str_replace("''", "", $str);
+            $str = preg_replace( '/\[\[([^\]\|]+\|)?([^\]\|]+)\]\]/', "$2", $str );
+
+        }
+        else{
+            $str = $str ;
+            $str = preg_replace( '/\[\[([^\]\|]+\|)?([^\]\|]+)\]\]/', "$2", $str );
+        }
+
+        return $str;
     }
 
     /**
@@ -50,10 +99,55 @@ class MediaWikiMedia extends Media {
      * @return  Array The authors of the work.
      */
     static function ParseAuthors ($text) {
-        $authors = array();
-        return $authors;
-    }
+        #$authors = array();
+        $pos = strpos($text, "{{Information");
+        $flag = 1; 
+        if ( $pos === false ) { 
+            $pos = strpos($text, "{{information"); 
+            $flag = 1;
+        }
 
+        if ( $pos === false ) {
+            $pos = strpos($text, "{{Artwork");
+            $flag = 0;
+        }
+
+        if ( $pos === false ) {
+            $pos = strpos($text, "{{artwork");
+            $flag = 0;
+        }
+
+        $str = substr($text, $pos);
+        $find = $flag ? "author" : "artist" ;
+        $bracket =  $flag ? "[[" : "{{" ;
+        $bracket1 = $flag ? "]]" : "}}" ;
+        $pos = strpos($text,$find);
+        
+        if ($pos) {//checking id description field is there or not
+            $str = substr($text, $pos+strlen($find));
+        }
+        else{
+            return $authors = array();
+        }
+
+        $pos = strpos($str, "[[");
+
+        if ($pos < 5) {
+            $pos = strpos($str, $bracket);
+            $str = substr($str, $pos + strlen($bracket));
+            $pos1 = strpos($str, $bracket1);
+            $str = substr($str, 0, $pos1);
+            $find = strpos($str, "|") ? "|" : ":" ;
+            $pos = strpos($str,$find);
+            $str = substr($str, $pos+strlen("|"));
+        }
+        else{
+            $pos = strpos($str, "|");
+            $str = substr($str, strpos($str, "=")+1 , $pos-2);
+        }
+        return $authors = array($str);
+    }
+        
     /**
      * Parses a MediaWiki page to get the title.
      *

@@ -20,6 +20,7 @@ require_once('../../DreykhMetadata/MediaWikiMedia.php');
 /**
  * Test cases for the class License
  */
+#{{en|''Crassula arborescens'', Botanic Garden, Munich, Germany}}
 class MediaWikiMediaTest extends \PHPUnit_Framework_TestCase {
     /**
      * Tests the parser functions
@@ -29,7 +30,7 @@ class MediaWikiMediaTest extends \PHPUnit_Framework_TestCase {
 =={{int:filedesc}}==
 {{Information
 |description=
-{{en|1=''Crassula arborescens'', Botanic Garden, Munich, Germany}}
+{{en|''Crassula arborescens'', [[Botanic Garden]], Munich, Germany}}
 {{es|1=''Crassula arborescens'', Jardín Botánico, Múnich, Alemania}}
 {{fr|1=''Crassula arborescens'', Jardin botanique, Munich, Allemagne}}
 |date=2012-04-21
@@ -62,12 +63,12 @@ class MediaWikiMediaTest extends \PHPUnit_Framework_TestCase {
 [[Category:2012 in Munich]]
 [[Category:April 2012 in Germany]]
 EOT;
-        $textQuux = <<<EOT
+        $textArtwork = <<<EOT
 == {{int:filedesc}} ==
 {{Artwork
  |artist           = {{creator:Amedeo Modigliani}}
  |title            = {{fr|''Portrait de Picasso }}
- |description      = 
+ |description      = {{es|1=''Crassula arborescens'', Jardín Botánico, Múnich, Alemania}}
  |date             = 1915
  |medium           = {{Technique|oil|canvas}}
  |dimensions       = 
@@ -95,9 +96,9 @@ EOT;
 
         //Empty string
         $media = MediaWikiMedia::FromWikitext("");
-        $this->assertEquals($media->description, "");
-        $this->assertEquals(count($media->authors), 0);
-        $this->assertEquals(count($media->licenses), 0);
+        $this->assertEquals( "" , $media->description );
+        $this->assertEquals( 0, count($media->authors) );
+        $this->assertEquals( 0, count($media->licenses) );
 
         //{{Information}}
         $media = MediaWikiMedia::FromWikitext($textInformation);
@@ -105,20 +106,20 @@ EOT;
         $expectedLicense->name = "Creative Commons Attribution-ShareAlike 3.0 Unported";
         $expectedLicense->code = "CC BY-SA 3.0";
         $expectedLicense->URL = "http://creativecommons.org/licenses/by-sa/3.0/";
-        $this->assertEquals($media->description, "Crassula arborescens, Botanic Garden, Munich, Germany");
-        $this->assertEquals($media->authors, array('Poco a poco'));
-        $this->assertEquals($media->licenses, array($expectedLicense));
+        $this->assertEquals( "Crassula arborescens, Botanic Garden, Munich, Germany+", $media->description );
+        $this->assertEquals( array('Poco a poco+'), $media->authors );
+        $this->assertEquals( array($expectedLicense), $media->licenses );
 
         //{{Artwork}}
         $media = MediaWikiMedia::FromWikitext($textArtwork);
         $expectedLicense = new License();
-        $this->assertEquals($media->description, "Portrait de Picasso");
-        $this->assertEquals($media->authors, array('Amedeo Modigliani'));
-        $this->assertEquals(count($media->licenses), 1);
+        $this->assertEquals( "Portrait de Picasso", $media->description) ;
+        $this->assertEquals( array('Amedeo Modigliani'), $media->authors );
+        $this->assertEquals( 1, count($media->licenses) );
         $licenseToTest = $media->licenses[0];
-        $this->assertEquals($licenseToTest->name, "Public domain");
-        $this->assertEquals($licenseToTest->code, "PD");
-        $this->assertEquals($licenseToTest->URL, "");
+        $this->assertEquals( "Public domain", $licenseToTest->name );
+        $this->assertEquals( "PD", $licenseToTest->code );
+        $this->assertEquals( "", $licenseToTest->URL );
     }
 
     /**
