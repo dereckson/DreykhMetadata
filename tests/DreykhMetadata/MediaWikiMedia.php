@@ -30,6 +30,7 @@ class MediaWikiMediaTest extends \PHPUnit_Framework_TestCase {
 =={{int:filedesc}}==
 {{Information
 |description=
+{{en|''Crassula arborescens'', [[Botanic Garden]], Munich, Germany}}
 {{es|1=''Crassula arborescens'', Jardín Botánico, Múnich, Alemania}}
 {{fr|1=''Crassula arborescens'', Jardin botanique, Munich, Allemagne}}
 |date=2012-04-21
@@ -106,7 +107,7 @@ EOT;
         $expectedLicense->code = "CC BY-SA 3.0";
         $expectedLicense->URL = "http://creativecommons.org/licenses/by-sa/3.0/";
         $this->assertEquals( "Crassula arborescens, Botanic Garden, Munich, Germany+", $media->description );
-        $this->assertEquals( array('Poco a poco'), $media->authors );
+        $this->assertEquals( array('Poco a poco+'), $media->authors );
         $this->assertEquals( array($expectedLicense), $media->licenses );
 
         //{{Artwork}}
